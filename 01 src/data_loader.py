@@ -1,12 +1,10 @@
-import pandas as pd 
-import os 
-import pathlib as Path
-
-
-
 '''Clase para descargar cargar los datos'''
 
-class DataLoader():
+import pandas as pd
+import os
+import pathlib as Path
+
+class DataLoader:
 
   Olist_archivos = {
       "Ordenes":           "olist_orders_dataset.csv",
@@ -20,33 +18,33 @@ class DataLoader():
     }
 
 
-'''Constructor para cargar los datos desde la ruta'''
-def __init__(self, ruta: str ):
-  self.ruta = Path(ruta)
-  self.dataframe = {}
-    
-'''Cargar un archivo CSV por el  nombre del diccionario'''    
-def carga_archivo(self, nombre: str) -> pd.DataFrame:
-  nombre_archivo = self.Olist_archivos.get(nombre)
+  '''Constructor para cargar los datos desde la ruta'''
+  def __init__(self, ruta: str):
+    self.ruta = Path.Path(ruta)
+    self.dataframe = {}
 
-  if not nombre_archivo:
-    raise ValueError(f'Dataset {nombre} no encontrado')
+  '''Cargar un archivo CSV por el  nombre del diccionario'''
+  def carga_archivo(self, nombre: str) -> pd.DataFrame:
+    nombre_archivo = self.Olist_archivos.get(nombre)
 
-  ruta_archivo =  self.ruta / nombre_archivo
-  print(f'Cargando archivo {nombre_archivo}')
-  df = pd.read_csv(ruta_archivo)
-  self.dataframe[nombre] = df
-  return df
+    if not nombre_archivo:
+      raise ValueError(f'Dataset {nombre} no encontrado')
 
-def cargar_todo(self) -> dict:
-  for nombre in self.Olist_archivos:
-    self.carga_archivo(nombre)
-  print(f"Se cargaron {len(self.dataframes)} datasets")
-  return self.dataframes
+    ruta_archivo =  self.ruta / nombre_archivo
+    print(f'Cargando archivo {nombre_archivo}')
+    df = pd.read_csv(ruta_archivo)
+    self.dataframe[nombre] = df
+    return df
 
-'''Resumen de los datos cargados'''
-def data_info(self):
-  for name, df in self.dataframe.items():
-    print(f"\n {name.upper()}")
-    print(f"   Filas: {df.shape[0]:,} | Columnas: {df.shape[1]}")
-    print(f"   Columnas: {list(df.columns)}")
+  def cargar_todo(self) -> dict:
+    for nombre in self.Olist_archivos:
+      self.carga_archivo(nombre)
+    print(f"Se cargaron {len(self.dataframe)} datasets")
+    return self.dataframe
+
+  '''Resumen de los datos cargados'''
+  def data_info(self):
+    for name, df in self.dataframe.items():
+      print(f"\n {name.upper()}")
+      print(f"   Filas: {df.shape[0]:,} | Columnas: {df.shape[1]}")
+      print(f"   Columnas: {list(df.columns)}")
