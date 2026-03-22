@@ -21,7 +21,7 @@ class DataCleaner:
       print('No hay columnas numericas')
       return self
     imputer = KNNImputer(n_neighbors= n_neighbors)
-    self.df[columnas_num] = imputer.fit_transform(df[columnas_num])
+    self.df[columnas_num] = imputer.fit_transform(self.df[columnas_num])
     print(f'Columnas imputadas: {columnas_num}')
     return self
 
